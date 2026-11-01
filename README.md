@@ -1,53 +1,60 @@
-# Fun Rust Training
+# 楽しく学ぶ Rust
 
-A concise, quiz-driven Rust course in Japanese, inspired by
-[The Rust Programming Language (Japanese edition)](https://doc.rust-jp.rs/book-ja/).
-Built with [Hugo](https://gohugo.io/) and the [Hugo Book](https://github.com/alex-shpak/hugo-book) theme.
+[The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/) を参考に、Rust の重要な概念を短く・楽しく学べるようにまとめたコースです。
+各章の最後にある選択式クイズで、理解度を確かめながら進められます。
 
-## Getting started
+[Hugo](https://gohugo.io/) と [Hugo Book](https://github.com/alex-shpak/hugo-book) テーマで作っています。
+
+## 起動方法
 
 ```sh
 git submodule update --init --recursive
 hugo server
 ```
 
-Open http://localhost:1313/. Build a static site with `hugo --gc --minify` (output in `public/`).
+http://localhost:1313/ を開きます。静的サイトをビルドするには `hugo --gc --minify` を実行します（出力先は `public/`）。
 
-## Structure
+## 構成
 
-- `content/docs/NN-*.md` — one chapter per file, ordered by `weight`
-- `layouts/_shortcodes/quiz.html` — renders the quiz defined in the page front matter
-- `layouts/_shortcodes/progress.html` — per-chapter quiz progress table (home page)
-- `assets/quiz.js` — answer checking, scoring, progress saved in `localStorage`
-- `assets/styles/custom.css` — quiz and `compile-fail` code block styles
+- `content/docs/NN-*.md` — 1 章 1 ファイル。並び順は front matter の `weight` で決まる
+- `layouts/_shortcodes/quiz.html` — ページの front matter に書いたクイズを表示する
+- `layouts/_shortcodes/progress.html` — トップページの章ごとの進捗表
+- `assets/quiz.js` — 正誤判定・スコア表示。結果はブラウザの `localStorage` に保存する
+- `assets/styles/custom.css` — クイズと `compile-fail` コードブロックのスタイル
+- `scripts/check_code.py` — コード例の検証スクリプト
 
-## Writing a chapter
+## 章の書き方
 
-Each chapter defines its quiz in front matter (`answer` is a 0-based index) and places
-`{{< quiz >}}` where it should appear:
+クイズは各章の front matter に書き（`answer` は 0 始まりの番号）、表示したい場所に `{{< quiz >}}` を置きます。
 
 ```yaml
 quiz:
-  - q: "Does this compile?"
+  - q: "次のコードはコンパイルできる？"
     code: |
       let s1 = String::from("hi");
       let s2 = s1;
       println!("{s1}");
-    choices: ["Yes", "No"]
+    choices: ["できる", "できない"]
     answer: 1
-    explain: "`s1` was moved into `s2`."
+    explain: "`s1` の所有権は `s2` にムーブ済みです。"
 ```
 
-Code block attributes:
+コードブロックには次の属性を付けられます。
 
-- ```` ```rust {class="compile-fail"} ```` — expected to fail compilation (shown with a red badge)
-- ```` ```rust {class="nocheck"} ```` — skipped by the checker (external crates, tests, etc.)
+- ```` ```rust {class="compile-fail"} ```` — コンパイルに失敗する想定の例。赤枠と「❌ コンパイルエラー」ラベルが付く
+- ```` ```rust {class="nocheck"} ```` — 検証スクリプトの対象外（外部クレートやテストを使う例など）
 
-## Checking code samples
+## コード例の検証
+
+[uv](https://docs.astral.sh/uv/) で実行します（依存の PyYAML は自動で入ります）。
 
 ```sh
-ruby scripts/check_code.rb content/docs/[0-9]*.md
+uv run scripts/check_code.py content/docs/[0-9]*.md
 ```
 
-Compiles every `rust` block with `rustc --edition 2024`, verifies `compile-fail` blocks
-fail, validates quiz answer indices, and reports whether each quiz snippet compiles.
+次の内容をチェックします。
+
+- 本文の `rust` コードブロックを `rustc --edition 2024` ですべてコンパイルする
+- `compile-fail` のブロックは失敗し、それ以外は成功することを確認する
+- クイズの `answer` が選択肢の範囲内かを確認する
+- クイズのコードがコンパイルできるかを表示する（正解の選択肢と見比べる用）
