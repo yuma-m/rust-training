@@ -5,7 +5,13 @@
 
 [Hugo](https://gohugo.io/) と [Hugo Book](https://github.com/alex-shpak/hugo-book) テーマで作っています。
 
-## 起動方法
+**👉 サイトはこちら: https://yuma.cloud/rust-training/**
+
+`main` ブランチに push すると、GitHub Actions（`.github/workflows/pages.yml`）がコード例を検証してからビルドし、GitHub Pages に自動で公開します。プルリクエストでは検証とビルドだけを行い、公開はしません。
+
+## ローカルでの起動方法
+
+執筆中に手元でプレビューする場合の手順です。[Hugo](https://gohugo.io/installation/)（extended 版）が必要です。
 
 ```sh
 git submodule update --init --recursive
@@ -61,6 +67,8 @@ quiz:
 ```sh
 uv run scripts/check_code.py content/docs/[0-9]*.md
 ```
+
+CI でも push とプルリクエストのたびに、最新の stable の Rust で同じチェックが走ります。失敗するとサイトは公開されません。
 
 次の内容をチェックします。
 

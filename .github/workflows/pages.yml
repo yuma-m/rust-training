@@ -1,8 +1,9 @@
-name: Deploy to GitHub Pages
+name: CI
 
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -11,15 +12,31 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 defaults:
   run:
     shell: bash
 
 jobs:
+  check:
+    name: Check code samples
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Compile Rust snippets and validate quizzes
+        run: |
+          rustc --version
+          uv run scripts/check_code.py content/docs/[0-9]*.md
+
   build:
+    needs: check
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.169.0
@@ -48,6 +65,7 @@ jobs:
 
   deploy:
     needs: build
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
