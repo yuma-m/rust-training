@@ -16,6 +16,8 @@
     {{- if $runnable }}
     <button type="button" class="rust-run">▶ 実行{{ if $tests }}（テスト）{{ end }}</button>
     {{- end }}
+    <button type="button" class="rust-edit">✎ 編集</button>
+    <button type="button" class="rust-reset" hidden>↺ 元に戻す</button>
     <a class="rust-open" href="https://play.rust-lang.org/" target="_blank" rel="noopener">Playground で開く ↗</a>
   </div>
   <div class="rust-output" hidden></div>

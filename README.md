@@ -20,8 +20,8 @@ http://localhost:1313/ を開きます。静的サイトをビルドするには
 - `layouts/_shortcodes/quiz.html` — ページの front matter に書いたクイズを表示する
 - `layouts/_shortcodes/progress.html` — トップページの章ごとの進捗表
 - `assets/quiz.js` — 正誤判定・スコア表示。結果はブラウザの `localStorage` に保存する
-- `layouts/_markup/render-codeblock-rust.html` — Rust のコードブロックに「▶ 実行」「Playground で開く」を付ける
-- `assets/playground.js` — [Rust Playground](https://play.rust-lang.org/) の API でコードを実行し、結果をページ内に表示する
+- `layouts/_markup/render-codeblock-rust.html` — Rust のコードブロックに「▶ 実行」「✎ 編集」「Playground で開く」を付ける
+- `assets/playground.js` — ページ内でのコード編集と、[Rust Playground](https://play.rust-lang.org/) の API による実行・結果表示
 - `assets/styles/custom.css` — クイズ・コードブロック・実行結果のスタイル
 - `scripts/check_code.py` — コード例の検証スクリプト
 
@@ -51,6 +51,8 @@ quiz:
 属性は `{class="exercise compile-fail"}` のように空白区切りで組み合わせられます。
 
 「▶ 実行」ボタンは `fn main` を含むブロックに付きます。`fn main` がなく `#[test]` を含むブロックはテストとして実行されます。それ以外のブロックには「Playground で開く」リンクだけが付きます。
+
+「✎ 編集」を押すとページ上でコードを書き換えられます（Tab / Shift+Tab でインデント、Ctrl/Cmd + Enter で実行、Esc でフォーカスを外す）。「↺ 元に戻す」で元のコードに戻ります。
 
 ## コード例の検証
 
