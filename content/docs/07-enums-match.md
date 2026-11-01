@@ -170,7 +170,36 @@ fn main() {
 
 ## 🧪 やってみよう
 
-信号機を表す `enum Light { Red, Yellow, Green }` を作り、次の色を返す `fn next(self) -> Light` と、待ち秒数を返す `fn wait(&self) -> u32` を `match` で実装しよう。
+下の書きかけコードの `TODO` を埋めて、**▶ 実行** で確かめよう。`todo!()` のままだと実行時に panic します。
+
+信号機の enum に、次の色を返す `next` と待ち秒数を返す `wait` を `match` で実装しよう。
+
+```rust {class="exercise"}
+#[derive(Debug)]
+enum Light {
+    Red,
+    Yellow,
+    Green,
+}
+
+impl Light {
+    fn next(self) -> Light {
+        todo!("赤 → 青 → 黄 → 赤 …")
+    }
+
+    fn wait(&self) -> u32 {
+        todo!("赤 30 秒、黄 3 秒、青 25 秒")
+    }
+}
+
+fn main() {
+    let mut light = Light::Red;
+    for _ in 0..4 {
+        println!("{light:?}: {} 秒", light.wait());
+        light = light.next();
+    }
+}
+```
 
 ## 📝 まとめ
 

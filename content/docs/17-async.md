@@ -129,7 +129,32 @@ async fn main() {
 
 ## 🧪 やってみよう
 
-上の `cook` を使い、3 品の料理を `tokio::join!` で並行に作って、全体の所要時間を `std::time::Instant` で計測してみよう。
+下の書きかけコードの `TODO` を埋めて、**▶ 実行** で確かめよう。`todo!()` のままだと実行時に panic します。
+
+3 品の料理を `tokio::join!` で並行に作って、全体の所要時間を計測してみよう（Playground でも tokio が使えます）。
+
+```rust {class="exercise nocheck"}
+use std::time::{Duration, Instant};
+use tokio::time::sleep;
+
+async fn cook(dish: &str, secs: u64) -> String {
+    sleep(Duration::from_secs(secs)).await;
+    format!("{dish} できあがり！")
+}
+
+#[tokio::main]
+async fn main() {
+    let start = Instant::now();
+
+    // TODO: tokio::join! で 3 品を並行に作ろう（今は 1 品ずつ順番）
+    let a = cook("ラーメン", 2).await;
+    let b = cook("餃子", 1).await;
+    let c = cook("チャーハン", 1).await;
+    println!("{a} {b} {c}");
+
+    println!("所要時間: {:.1?}", start.elapsed()); // 並行なら約 2 秒
+}
+```
 
 ## 📝 まとめ
 

@@ -153,7 +153,20 @@ fn main() {
 
 ## 🧪 やってみよう
 
-上の `first_word` を参考に、最後の単語を返す `last_word(s: &str) -> &str` を書いてみよう（ヒント: `s.rfind(' ')`）。
+下の書きかけコードの `TODO` を埋めて、**▶ 実行** で確かめよう。`todo!()` のままだと実行時に panic します。
+
+最後の単語を返す `last_word` を書いてみよう。
+
+```rust {class="exercise"}
+fn last_word(s: &str) -> &str {
+    todo!("ヒント: s.rfind(' ') で最後の空白の位置がわかる")
+}
+
+fn main() {
+    println!("{}", last_word("hello wonderful world")); // world
+    println!("{}", last_word("rust"));                  // rust
+}
+```
 
 ## 📝 まとめ
 

@@ -151,7 +151,22 @@ fn main() -> Result<(), Box<dyn Error>> {
 
 ## 🧪 やってみよう
 
-文字列 `"3,5"` を受け取り、2 つの数の和を返す `fn sum_pair(s: &str) -> Result<i32, Box<dyn std::error::Error>>` を `?` を使って書いてみよう。
+下の書きかけコードの `TODO` を埋めて、**▶ 実行** で確かめよう。`todo!()` のままだと実行時に panic します。
+
+文字列 `"3,5"` を受け取り、2 つの数の和を返す関数を `?` を使って書いてみよう。
+
+```rust {class="exercise"}
+use std::error::Error;
+
+fn sum_pair(s: &str) -> Result<i32, Box<dyn Error>> {
+    todo!("ヒント: s.split_once(',') と parse::<i32>()?")
+}
+
+fn main() {
+    println!("{:?}", sum_pair("3,5").map_err(|e| e.to_string())); // Ok(8)
+    println!("{:?}", sum_pair("3,x").map_err(|e| e.to_string())); // Err(...)
+}
+```
 
 ## 📝 まとめ
 

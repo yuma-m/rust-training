@@ -1,2 +1,4 @@
-{{- $js := resources.Get "quiz.js" | resources.Minify | resources.Fingerprint -}}
+{{- range slice "quiz.js" "playground.js" -}}
+{{- $js := resources.Get . | resources.Minify | resources.Fingerprint }}
 <script defer src="{{ $js.RelPermalink }}"></script>
+{{- end }}

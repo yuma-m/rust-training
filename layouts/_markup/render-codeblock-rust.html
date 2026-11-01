@@ -1,0 +1,22 @@
+{{- $class := or .Attributes.class "" -}}
+{{- $classes := split $class " " -}}
+{{- $crateType := "bin" -}}
+{{- $tests := false -}}
+{{- if and (not (strings.Contains .Inner "fn main")) (strings.Contains .Inner "#[test]") -}}
+  {{- $crateType = "lib" -}}
+  {{- $tests = true -}}
+{{- end -}}
+{{- $runnable := and (not (in $classes "norun")) (or (strings.Contains .Inner "fn main") $tests) -}}
+<div class="rust-block {{ $class }}"
+  data-crate-type="{{ $crateType }}"
+  data-tests="{{ $tests }}">
+  {{- (transform.HighlightCodeBlock . .Options).Wrapped -}}
+  <textarea class="rust-source" hidden aria-hidden="true">{{ .Inner }}</textarea>
+  <div class="rust-actions">
+    {{- if $runnable }}
+    <button type="button" class="rust-run">▶ 実行{{ if $tests }}（テスト）{{ end }}</button>
+    {{- end }}
+    <a class="rust-open" href="https://play.rust-lang.org/" target="_blank" rel="noopener">Playground で開く ↗</a>
+  </div>
+  <div class="rust-output" hidden></div>
+</div>

@@ -181,7 +181,32 @@ fn main() {
 
 ## 🧪 やってみよう
 
-`trait Animal { fn name(&self) -> String; fn speak(&self) -> String; }` を定義し、`Dog` と `Cat` に実装して、`fn intro(a: &impl Animal)` で「ポチ: ワン！」と表示してみよう。
+下の書きかけコードの `TODO` を埋めて、**▶ 実行** で確かめよう。`todo!()` のままだと実行時に panic します。
+
+`Animal` トレイトを `Dog` と `Cat` に実装して、「ポチ: ワン！」のように表示しよう。
+
+```rust {class="exercise"}
+trait Animal {
+    fn name(&self) -> String;
+    fn speak(&self) -> String;
+}
+
+struct Dog;
+struct Cat;
+
+// TODO: impl Animal for Dog { ... }
+// TODO: impl Animal for Cat { ... }
+
+fn intro(a: &impl Animal) {
+    println!("{}: {}", a.name(), a.speak());
+}
+
+fn main() {
+    // TODO: コメントを外そう
+    // intro(&Dog);
+    // intro(&Cat);
+}
+```
 
 ## 📝 まとめ
 

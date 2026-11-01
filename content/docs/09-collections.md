@@ -144,7 +144,30 @@ fn main() {
 
 ## 🧪 やってみよう
 
-整数のリストから **平均値・中央値・最頻値** を求める関数を書いてみよう（ヒント: `sort()` と `HashMap`）。
+下の書きかけコードの `TODO` を埋めて、**▶ 実行** で確かめよう。`todo!()` のままだと実行時に panic します。
+
+整数のリストから **平均値・中央値・最頻値** を求めよう。
+
+```rust {class="exercise"}
+use std::collections::HashMap;
+
+fn mean(v: &[i32]) -> f64 {
+    todo!("ヒント: iter().sum::<i32>() as f64")
+}
+
+fn median(v: &[i32]) -> f64 {
+    todo!("ヒント: to_vec() してから sort()")
+}
+
+fn mode(v: &[i32]) -> i32 {
+    todo!("ヒント: HashMap で出現回数を数える")
+}
+
+fn main() {
+    let v = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+    println!("平均 {} / 中央値 {} / 最頻値 {}", mean(&v), median(&v), mode(&v));
+}
+```
 
 ## 📝 まとめ
 

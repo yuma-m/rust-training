@@ -140,7 +140,24 @@ src/
 
 ## 🧪 やってみよう
 
-`cargo new --lib shapes` でライブラリを作り、`src/lib.rs` に `pub mod circle` を定義して `pub fn area(r: f64) -> f64` を公開してみよう。
+下の書きかけコードの `TODO` を埋めて、**▶ 実行** で確かめよう。`todo!()` のままだと実行時に panic します。
+
+ファイルを分ける代わりに、`mod` ブロックで練習します。`shapes::circle` モジュールに円の面積を返す `area` を公開しよう。
+
+```rust {class="exercise"}
+mod shapes {
+    pub mod circle {
+        // TODO: pub fn area(r: f64) -> f64 を定義しよう
+    }
+}
+
+fn main() {
+    // TODO: コメントを外して呼び出そう
+    // println!("{}", shapes::circle::area(2.0));
+}
+```
+
+手元で試すなら `cargo new --lib shapes` でライブラリを作り、`src/lib.rs` に書いてみましょう。
 
 ## 📝 まとめ
 

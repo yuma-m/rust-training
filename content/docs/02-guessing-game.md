@@ -44,7 +44,7 @@ quiz:
 
 ## 完成形
 
-```rust {class="nocheck"}
+```rust {class="nocheck norun"}
 use rand::RngExt;
 use std::cmp::Ordering;
 use std::io;
@@ -100,8 +100,35 @@ cargo add rand@0.10
 
 ## 🧪 やってみよう
 
+下の書きかけコードの `TODO` を埋めて、**▶ 実行** で確かめよう。`todo!()` のままだと実行時に panic します。
+
+Playground ではキーボード入力ができないので、予想を配列で用意しました。
+
 1. 何回目で当たったかを数えて、正解時に「5 回で正解！」と表示してみよう
-2. 1〜100 の範囲外の数が入力されたら注意メッセージを出してみよう
+2. 1〜100 の範囲外の予想には注意メッセージを出してみよう
+
+```rust {class="exercise"}
+use std::cmp::Ordering;
+
+fn main() {
+    let secret = 42;
+    let guesses = [50, 0, 25, 37, 43, 42]; // キーボード入力の代わり
+    let mut count = 0;
+
+    for guess in guesses {
+        // TODO: count を増やす
+        // TODO: 範囲外（1〜100 以外）なら注意して continue
+        match guess.cmp(&secret) {
+            Ordering::Less => println!("{guess}: もっと大きい！"),
+            Ordering::Greater => println!("{guess}: もっと小さい！"),
+            Ordering::Equal => {
+                println!("正解！🎉"); // TODO: 「N 回で正解！」にする
+                break;
+            }
+        }
+    }
+}
+```
 
 ## 📝 まとめ
 

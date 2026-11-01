@@ -155,7 +155,19 @@ fn main() {
 
 ## 🧪 やってみよう
 
-2 つの文字列スライスを受け取り、先頭の文字が辞書順で小さい方を返す `fn smaller<'a>(a: &'a str, b: &'a str) -> &'a str` を書いてみよう。
+下の書きかけコードの `TODO` を埋めて、**▶ 実行** で確かめよう。`todo!()` のままだと実行時に panic します。
+
+2 つの文字列スライスのうち、辞書順で小さい方を返す関数を書いてみよう。
+
+```rust {class="exercise"}
+fn smaller<'a>(a: &'a str, b: &'a str) -> &'a str {
+    todo!("ヒント: &str は < で比較できる")
+}
+
+fn main() {
+    println!("{}", smaller("banana", "apple")); // apple
+}
+```
 
 ## 📝 まとめ
 

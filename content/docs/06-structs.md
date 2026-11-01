@@ -151,7 +151,27 @@ fn main() {
 
 ## 🧪 やってみよう
 
-`Rect` に「正方形かどうか」を返す `is_square(&self) -> bool` メソッドを追加しよう。
+下の書きかけコードの `TODO` を埋めて、**▶ 実行** で確かめよう。`todo!()` のままだと実行時に panic します。
+
+`Rect` に「正方形かどうか」を返すメソッドを追加しよう。
+
+```rust {class="exercise"}
+struct Rect {
+    w: u32,
+    h: u32,
+}
+
+impl Rect {
+    fn is_square(&self) -> bool {
+        todo!()
+    }
+}
+
+fn main() {
+    println!("{}", Rect { w: 3, h: 3 }.is_square()); // true
+    println!("{}", Rect { w: 3, h: 5 }.is_square()); // false
+}
+```
 
 ## 📝 まとめ
 

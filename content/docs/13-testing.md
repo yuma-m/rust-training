@@ -134,7 +134,7 @@ calc/
     └── api.rs
 ```
 
-```rust {class="nocheck"}
+```rust {class="nocheck norun"}
 // tests/api.rs — 外部のユーザーと同じ立場でテスト
 use calc::add;
 
@@ -149,7 +149,33 @@ fn add_from_outside() {
 
 ## 🧪 やってみよう
 
-09 章の「平均値・中央値」の関数にテストを書いてみよう。空のリストのときどうするかも決めてテストにしよう。
+下の書きかけコードの `TODO` を埋めて、**▶ 実行** で確かめよう。`todo!()` のままだと実行時に panic します。
+
+平均値を返す関数にテストを書いてみよう。**▶ 実行（テスト）** で `cargo test` 相当が走ります。
+
+```rust {class="exercise"}
+pub fn mean(v: &[i32]) -> Option<f64> {
+    if v.is_empty() {
+        return None;
+    }
+    Some(v.iter().sum::<i32>() as f64 / v.len() as f64)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn mean_of_values() {
+        todo!("assert_eq!(mean(&[1, 2, 3]), Some(2.0)) のように確かめよう")
+    }
+
+    #[test]
+    fn mean_of_empty() {
+        todo!("空のときは None")
+    }
+}
+```
 
 ## 📝 まとめ
 

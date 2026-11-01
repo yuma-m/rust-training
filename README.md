@@ -20,7 +20,9 @@ http://localhost:1313/ を開きます。静的サイトをビルドするには
 - `layouts/_shortcodes/quiz.html` — ページの front matter に書いたクイズを表示する
 - `layouts/_shortcodes/progress.html` — トップページの章ごとの進捗表
 - `assets/quiz.js` — 正誤判定・スコア表示。結果はブラウザの `localStorage` に保存する
-- `assets/styles/custom.css` — クイズと `compile-fail` コードブロックのスタイル
+- `layouts/_markup/render-codeblock-rust.html` — Rust のコードブロックに「▶ 実行」「Playground で開く」を付ける
+- `assets/playground.js` — [Rust Playground](https://play.rust-lang.org/) の API でコードを実行し、結果をページ内に表示する
+- `assets/styles/custom.css` — クイズ・コードブロック・実行結果のスタイル
 - `scripts/check_code.py` — コード例の検証スクリプト
 
 ## 章の書き方
@@ -42,7 +44,13 @@ quiz:
 コードブロックには次の属性を付けられます。
 
 - ```` ```rust {class="compile-fail"} ```` — コンパイルに失敗する想定の例。赤枠と「❌ コンパイルエラー」ラベルが付く
-- ```` ```rust {class="nocheck"} ```` — 検証スクリプトの対象外（外部クレートやテストを使う例など）
+- ```` ```rust {class="exercise"} ```` — 「やってみよう」の書きかけコード。破線枠と「✏️ 書きかけコード」ラベルが付く
+- ```` ```rust {class="nocheck"} ```` — 検証スクリプトの対象外（外部クレートを使う例など）
+- ```` ```rust {class="norun"} ```` — 「▶ 実行」ボタンを出さない（キーボード入力が必要な例など）
+
+属性は `{class="exercise compile-fail"}` のように空白区切りで組み合わせられます。
+
+「▶ 実行」ボタンは `fn main` を含むブロックに付きます。`fn main` がなく `#[test]` を含むブロックはテストとして実行されます。それ以外のブロックには「Playground で開く」リンクだけが付きます。
 
 ## コード例の検証
 

@@ -142,7 +142,24 @@ fn main() {
 
 ## 🧪 やってみよう
 
-`Rc<RefCell<Vec<String>>>` で「共有 TODO リスト」を作り、2 つの変数から別々に `push` して、最後に全部表示してみよう。
+下の書きかけコードの `TODO` を埋めて、**▶ 実行** で確かめよう。`todo!()` のままだと実行時に panic します。
+
+`Rc<RefCell<Vec<String>>>` で「共有 TODO リスト」を作り、2 つの変数から別々に `push` してみよう。
+
+```rust {class="exercise"}
+use std::cell::RefCell;
+use std::rc::Rc;
+
+fn main() {
+    let todos = Rc::new(RefCell::new(Vec::<String>::new()));
+    let alice = Rc::clone(&todos);
+    let bob = Rc::clone(&todos);
+
+    // TODO: alice と bob からそれぞれ borrow_mut().push(...) しよう
+
+    println!("{:?}", todos.borrow());
+}
+```
 
 ## 📝 まとめ
 

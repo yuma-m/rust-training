@@ -148,7 +148,31 @@ fn main() {
 
 ## 🧪 やってみよう
 
-1〜1,000,000 の合計を 4 つのスレッドで分担して計算し、チャネルで部分和を集めて合計してみよう。
+下の書きかけコードの `TODO` を埋めて、**▶ 実行** で確かめよう。`todo!()` のままだと実行時に panic します。
+
+1〜1,000,000 の合計を 4 つのスレッドで分担して計算し、チャネルで部分和を集めよう。
+
+```rust {class="exercise"}
+use std::sync::mpsc;
+use std::thread;
+
+fn main() {
+    let (tx, rx) = mpsc::channel::<u64>();
+
+    for i in 0..4u64 {
+        let tx = tx.clone();
+        let (start, end) = (i * 250_000 + 1, (i + 1) * 250_000);
+        thread::spawn(move || {
+            // TODO: start..=end の合計を計算して tx.send(...) しよう
+            let _ = (start, end, &tx);
+        });
+    }
+    drop(tx);
+
+    let total: u64 = rx.iter().sum();
+    println!("合計: {total}（正解は 500000500000）");
+}
+```
 
 ## 📝 まとめ
 
