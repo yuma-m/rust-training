@@ -116,8 +116,8 @@ fn main() {
     let mut count = 0;
 
     for guess in guesses {
-        // TODO: count を増やす
         // TODO: 範囲外（1〜100 以外）なら注意して continue
+        // TODO: count を増やす（範囲外の予想は数えない）
         match guess.cmp(&secret) {
             Ordering::Less => println!("{guess}: もっと大きい！"),
             Ordering::Greater => println!("{guess}: もっと小さい！"),
@@ -139,11 +139,11 @@ fn main() {
     let mut count = 0;
 
     for guess in guesses {
-        count += 1;
         if !(1..=100).contains(&guess) {
             println!("{guess}: 1〜100 の数で予想してね");
             continue;
         }
+        count += 1;
         match guess.cmp(&secret) {
             Ordering::Less => println!("{guess}: もっと大きい！"),
             Ordering::Greater => println!("{guess}: もっと小さい！"),
