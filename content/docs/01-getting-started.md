@@ -114,6 +114,13 @@ fn main() {
 }
 ```
 
+```rust {class="solution"}
+fn main() {
+    println!("{}は{}が好き", "ferris", "カニカマ");
+    println!("{}の好きな食べ物は{}です", "ferris", "お寿司");
+}
+```
+
 ## 📝 まとめ
 
 - Rust のインストールは `rustup`、プロジェクト管理は `cargo`

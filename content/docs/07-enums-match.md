@@ -201,6 +201,41 @@ fn main() {
 }
 ```
 
+```rust {class="solution"}
+#[derive(Debug)]
+enum Light {
+    Red,
+    Yellow,
+    Green,
+}
+
+impl Light {
+    fn next(self) -> Light {
+        match self {
+            Light::Red => Light::Green,
+            Light::Green => Light::Yellow,
+            Light::Yellow => Light::Red,
+        }
+    }
+
+    fn wait(&self) -> u32 {
+        match self {
+            Light::Red => 30,
+            Light::Yellow => 3,
+            Light::Green => 25,
+        }
+    }
+}
+
+fn main() {
+    let mut light = Light::Red;
+    for _ in 0..4 {
+        println!("{light:?}: {} 秒", light.wait());
+        light = light.next();
+    }
+}
+```
+
 ## 📝 まとめ
 
 - enum の各バリアントは異なるデータを持てる

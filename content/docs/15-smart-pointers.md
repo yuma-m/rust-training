@@ -161,6 +161,22 @@ fn main() {
 }
 ```
 
+```rust {class="solution"}
+use std::cell::RefCell;
+use std::rc::Rc;
+
+fn main() {
+    let todos = Rc::new(RefCell::new(Vec::<String>::new()));
+    let alice = Rc::clone(&todos);
+    let bob = Rc::clone(&todos);
+
+    alice.borrow_mut().push(String::from("牛乳を買う"));
+    bob.borrow_mut().push(String::from("部屋を掃除する"));
+
+    println!("{:?}", todos.borrow());
+}
+```
+
 ## 📝 まとめ
 
 - `Box<T>`: ヒープ確保。再帰型やトレイトオブジェクトに

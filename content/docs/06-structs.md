@@ -173,6 +173,24 @@ fn main() {
 }
 ```
 
+```rust {class="solution"}
+struct Rect {
+    w: u32,
+    h: u32,
+}
+
+impl Rect {
+    fn is_square(&self) -> bool {
+        self.w == self.h
+    }
+}
+
+fn main() {
+    println!("{}", Rect { w: 3, h: 3 }.is_square()); // true
+    println!("{}", Rect { w: 3, h: 5 }.is_square()); // false
+}
+```
+
 ## 📝 まとめ
 
 - `struct` でデータをまとめ、`impl` で振る舞いを追加

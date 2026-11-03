@@ -169,6 +169,43 @@ fn main() {
 }
 ```
 
+```rust {class="solution"}
+use std::collections::HashMap;
+
+fn mean(v: &[i32]) -> f64 {
+    v.iter().sum::<i32>() as f64 / v.len() as f64
+}
+
+fn median(v: &[i32]) -> f64 {
+    let mut sorted = v.to_vec();
+    sorted.sort();
+    let mid = sorted.len() / 2;
+    // 要素数が偶数なら中央 2 つの平均
+    if sorted.len() % 2 == 0 {
+        (sorted[mid - 1] + sorted[mid]) as f64 / 2.0
+    } else {
+        sorted[mid] as f64
+    }
+}
+
+fn mode(v: &[i32]) -> i32 {
+    let mut counts = HashMap::new();
+    for &n in v {
+        *counts.entry(n).or_insert(0) += 1;
+    }
+    counts
+        .into_iter()
+        .max_by_key(|&(_, count)| count)
+        .map(|(n, _)| n)
+        .unwrap()
+}
+
+fn main() {
+    let v = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+    println!("平均 {} / 中央値 {} / 最頻値 {}", mean(&v), median(&v), mode(&v));
+}
+```
+
 ## 📝 まとめ
 
 - `Vec` は `push`/`pop`/`get`。参照を持ったまま `push` はできない

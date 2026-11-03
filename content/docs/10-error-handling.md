@@ -168,6 +168,21 @@ fn main() {
 }
 ```
 
+```rust {class="solution"}
+use std::error::Error;
+
+fn sum_pair(s: &str) -> Result<i32, Box<dyn Error>> {
+    // ok_or で Option を Result に。&str は Box<dyn Error> に自動変換される
+    let (a, b) = s.split_once(',').ok_or("カンマがありません")?;
+    Ok(a.trim().parse::<i32>()? + b.trim().parse::<i32>()?)
+}
+
+fn main() {
+    println!("{:?}", sum_pair("3,5").map_err(|e| e.to_string())); // Ok(8)
+    println!("{:?}", sum_pair("3,x").map_err(|e| e.to_string())); // Err(...)
+}
+```
+
 ## 📝 まとめ
 
 - 回復不能 → `panic!`、回復可能 → `Result<T, E>`

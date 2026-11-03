@@ -208,6 +208,45 @@ fn main() {
 }
 ```
 
+```rust {class="solution"}
+trait Animal {
+    fn name(&self) -> String;
+    fn speak(&self) -> String;
+}
+
+struct Dog;
+struct Cat;
+
+impl Animal for Dog {
+    fn name(&self) -> String {
+        String::from("ポチ")
+    }
+
+    fn speak(&self) -> String {
+        String::from("ワン！")
+    }
+}
+
+impl Animal for Cat {
+    fn name(&self) -> String {
+        String::from("タマ")
+    }
+
+    fn speak(&self) -> String {
+        String::from("ニャー！")
+    }
+}
+
+fn intro(a: &impl Animal) {
+    println!("{}: {}", a.name(), a.speak());
+}
+
+fn main() {
+    intro(&Dog);
+    intro(&Cat);
+}
+```
+
 ## 📝 まとめ
 
 - ジェネリクスで型をパラメータ化。単相化でコストゼロ

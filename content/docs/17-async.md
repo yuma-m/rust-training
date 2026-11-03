@@ -156,6 +156,30 @@ async fn main() {
 }
 ```
 
+```rust {class="solution nocheck"}
+use std::time::{Duration, Instant};
+use tokio::time::sleep;
+
+async fn cook(dish: &str, secs: u64) -> String {
+    sleep(Duration::from_secs(secs)).await;
+    format!("{dish} できあがり！")
+}
+
+#[tokio::main]
+async fn main() {
+    let start = Instant::now();
+
+    let (a, b, c) = tokio::join!(
+        cook("ラーメン", 2),
+        cook("餃子", 1),
+        cook("チャーハン", 1),
+    );
+    println!("{a} {b} {c}");
+
+    println!("所要時間: {:.1?}", start.elapsed()); // 並行なら約 2 秒
+}
+```
+
 ## 📝 まとめ
 
 - `async fn` は `Future` を返し、`.await` で完了を待つ

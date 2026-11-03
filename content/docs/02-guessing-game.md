@@ -130,6 +130,32 @@ fn main() {
 }
 ```
 
+```rust {class="solution"}
+use std::cmp::Ordering;
+
+fn main() {
+    let secret = 42;
+    let guesses = [50, 0, 25, 37, 43, 42];
+    let mut count = 0;
+
+    for guess in guesses {
+        count += 1;
+        if !(1..=100).contains(&guess) {
+            println!("{guess}: 1〜100 の数で予想してね");
+            continue;
+        }
+        match guess.cmp(&secret) {
+            Ordering::Less => println!("{guess}: もっと大きい！"),
+            Ordering::Greater => println!("{guess}: もっと小さい！"),
+            Ordering::Equal => {
+                println!("{count} 回で正解！🎉");
+                break;
+            }
+        }
+    }
+}
+```
+
 ## 📝 まとめ
 
 - 外部クレートは `cargo add` で追加し、`use` で取り込む

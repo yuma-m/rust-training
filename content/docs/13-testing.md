@@ -177,6 +177,31 @@ mod tests {
 }
 ```
 
+```rust {class="solution"}
+pub fn mean(v: &[i32]) -> Option<f64> {
+    if v.is_empty() {
+        return None;
+    }
+    Some(v.iter().sum::<i32>() as f64 / v.len() as f64)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn mean_of_values() {
+        assert_eq!(mean(&[1, 2, 3]), Some(2.0));
+        assert_eq!(mean(&[1, 2]), Some(1.5));
+    }
+
+    #[test]
+    fn mean_of_empty() {
+        assert_eq!(mean(&[]), None);
+    }
+}
+```
+
 ## 📝 まとめ
 
 - `#[cfg(test)] mod tests` + `#[test]` でユニットテスト

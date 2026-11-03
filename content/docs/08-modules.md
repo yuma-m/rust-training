@@ -157,6 +157,20 @@ fn main() {
 }
 ```
 
+```rust {class="solution"}
+mod shapes {
+    pub mod circle {
+        pub fn area(r: f64) -> f64 {
+            std::f64::consts::PI * r * r
+        }
+    }
+}
+
+fn main() {
+    println!("{}", shapes::circle::area(2.0));
+}
+```
+
 手元で試すなら `cargo new --lib shapes` でライブラリを作り、`src/lib.rs` に書いてみましょう。
 
 ## 📝 まとめ

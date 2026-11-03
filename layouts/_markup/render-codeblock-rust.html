@@ -6,7 +6,12 @@
   {{- $crateType = "lib" -}}
   {{- $tests = true -}}
 {{- end -}}
+{{- $solution := in $classes "solution" -}}
 {{- $runnable := and (not (in $classes "norun")) (or (strings.Contains .Inner "fn main") $tests) -}}
+{{- if $solution }}
+<details class="solution">
+  <summary>💡 解答例を見る</summary>
+{{- end }}
 <div class="rust-block {{ $class }}"
   data-crate-type="{{ $crateType }}"
   data-tests="{{ $tests }}">
@@ -22,3 +27,6 @@
   </div>
   <div class="rust-output" hidden></div>
 </div>
+{{- if $solution }}
+</details>
+{{- end }}

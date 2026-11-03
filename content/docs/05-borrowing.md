@@ -168,6 +168,20 @@ fn main() {
 }
 ```
 
+```rust {class="solution"}
+fn last_word(s: &str) -> &str {
+    match s.rfind(' ') {
+        Some(i) => &s[i + 1..],
+        None => s,
+    }
+}
+
+fn main() {
+    println!("{}", last_word("hello wonderful world")); // world
+    println!("{}", last_word("rust"));                  // rust
+}
+```
+
 ## 📝 まとめ
 
 - `&` で借りる、`&mut` で書き換え可能に借りる

@@ -178,6 +178,16 @@ fn main() {
 }
 ```
 
+```rust {class="solution"}
+fn main() {
+    let total: u32 = (1..=100)
+        .filter(|n| n % 3 == 0 && n % 5 != 0)
+        .map(|n| n * n)
+        .sum();
+    println!("{total}"); // 正解は 92286
+}
+```
+
 ## 📝 まとめ
 
 - クロージャは `|引数| 式`。環境を `Fn` / `FnMut` / `FnOnce` の形で捕捉

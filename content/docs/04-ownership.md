@@ -159,6 +159,14 @@ fn main() {
 }
 ```
 
+```rust {class="solution"}
+fn main() {
+    let s1 = String::from("hello");
+    let s2 = s1.clone();
+    println!("{s1} {s2}");
+}
+```
+
 ## 📝 まとめ
 
 - 値の所有者は常に 1 つ。スコープを抜けると自動で解放

@@ -169,6 +169,16 @@ fn main() {
 }
 ```
 
+```rust {class="solution"}
+fn smaller<'a>(a: &'a str, b: &'a str) -> &'a str {
+    if a < b { a } else { b }
+}
+
+fn main() {
+    println!("{}", smaller("banana", "apple")); // apple
+}
+```
+
 ## 📝 まとめ
 
 - ライフタイムはダングリング参照を防ぐための仕組み

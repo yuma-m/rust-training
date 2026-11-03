@@ -174,6 +174,27 @@ fn main() {
 }
 ```
 
+```rust {class="solution"}
+use std::sync::mpsc;
+use std::thread;
+
+fn main() {
+    let (tx, rx) = mpsc::channel::<u64>();
+
+    for i in 0..4u64 {
+        let tx = tx.clone();
+        let (start, end) = (i * 250_000 + 1, (i + 1) * 250_000);
+        thread::spawn(move || {
+            tx.send((start..=end).sum()).unwrap();
+        });
+    }
+    drop(tx);
+
+    let total: u64 = rx.iter().sum();
+    println!("合計: {total}（正解は 500000500000）");
+}
+```
+
 ## 📝 まとめ
 
 - `thread::spawn(move || ...)` でスレッド起動、`join` で待機
